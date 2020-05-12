@@ -13,7 +13,7 @@ public interface CustomerService {
 
     CustomerDto getCustomerById(Long customerId) throws CustomerNotFoundException;
 
-    void updateCustomer(Long customerId, CustomerDto c) throws CustomerNotFoundException;
+    CustomerDto updateCustomer(Long customerId, CustomerDto c) throws CustomerNotFoundException;
 
     Long saveCustomer(CustomerDto c);
 

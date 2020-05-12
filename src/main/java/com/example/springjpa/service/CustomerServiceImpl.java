@@ -49,14 +49,16 @@ public class CustomerServiceImpl implements CustomerService {
     }
 
     @Override
-    public void updateCustomer(Long customerId, CustomerDto c) throws CustomerNotFoundException {
+    public CustomerDto updateCustomer(Long customerId, CustomerDto c) throws CustomerNotFoundException {
 
         Customer customer = checkIfPresent(customerId);
         // update Customer domain object with data from Dto and save it back to DB
         customer.setFirstName(c.getFirstName());
         customer.setLastName(c.getLastName());
 
-        this.customerRepository.save(customer);
+        Customer savedCustomer = this.customerRepository.save(customer);
+        return this.customerMapper.customerToCustomerDto(savedCustomer);
+
     }
 
     @Override
@@ -77,7 +79,7 @@ public class CustomerServiceImpl implements CustomerService {
         this.customerRepository.deleteByCustomerId(customerId);
     }
 
-    public Customer checkIfPresent(Long customerId) throws CustomerNotFoundException {
+    private Customer checkIfPresent(Long customerId) throws CustomerNotFoundException {
 
         Optional<Customer> customerObj = customerRepository.findByCustomerId(customerId);
         Customer customer = customerObj.orElseThrow(() -> {
