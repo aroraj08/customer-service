@@ -4,9 +4,11 @@ import com.example.springjpa.model.CustomerDto;
 import com.example.springjpa.exceptions.CustomerNotFoundException;
 import com.example.springjpa.service.CustomerService;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.print.attribute.standard.Media;
 import java.net.URI;
 import java.util.List;
 import java.util.Optional;
@@ -32,11 +34,13 @@ public class CustomerController {
 
     @GetMapping("/all")
     public ResponseEntity<List<CustomerDto>> getAllCustomers() {
-        Optional<List<CustomerDto>> customerList = this.customerService.getCustomers();
+        Optional<List<CustomerDto>> customerList =
+                this.customerService.getCustomers();
         return ResponseEntity.ok(customerList.get());
     }
 
-    @PostMapping
+    @PostMapping(consumes = {MediaType.APPLICATION_JSON_VALUE},
+            produces = {MediaType.APPLICATION_JSON_VALUE})
     public ResponseEntity<Long> addNewCustomer(@RequestBody CustomerDto customerDto) {
 
         Long customerId = this.customerService.saveCustomer(customerDto);
