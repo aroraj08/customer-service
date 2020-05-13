@@ -1,6 +1,9 @@
 package com.example.springjpa.controller;
 
+import com.example.springjpa.domain.Customer;
 import com.example.springjpa.exceptions.CustomerNotFoundException;
+import com.example.springjpa.mapper.CustomerMapper;
+import com.example.springjpa.mapper.CustomerMapperImpl;
 import com.example.springjpa.model.CustomerDto;
 import com.example.springjpa.service.CustomerService;
 import org.junit.jupiter.api.AfterEach;
@@ -14,6 +17,7 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 
 import static org.hamcrest.Matchers.is;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.*;
 
@@ -25,7 +29,7 @@ import java.util.Optional;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
-@WebMvcTest(CustomerController.class)
+@WebMvcTest(controllers = {CustomerController.class})
 class CustomerControllerTest {
 
     private static final String MAPPING = "/customer/api/v1";
@@ -37,6 +41,8 @@ class CustomerControllerTest {
     private CustomerService customerService;
 
     CustomerDto customerDto;
+
+    CustomerMapper customerMapper = new CustomerMapperImpl();
 
     @BeforeEach
     void setUp() {
@@ -55,6 +61,9 @@ class CustomerControllerTest {
 
        when(this.customerService.getCustomerById(any()))
                 .thenReturn(customerDto);
+
+        Customer customer = this.customerMapper.customerDtoToCustomer(customerDto);
+        assertEquals(customer.getFirstName(), customerDto.getFirstName());
 
         this.mockMvc.perform
                 (get(URI.create(MAPPING + "/" + customerDto.getCustomerId())))
