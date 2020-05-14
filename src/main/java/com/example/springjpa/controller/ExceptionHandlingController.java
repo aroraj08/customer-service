@@ -7,6 +7,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.dao.DataAccessException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
@@ -59,5 +60,18 @@ public class ExceptionHandlingController {
                 }
         );
         return new ResponseEntity<>(errorList, HttpStatus.BAD_REQUEST);
+    }
+
+    @ExceptionHandler(MethodArgumentNotValidException.class)
+    public ResponseEntity<ErrorDto> handleMethodValidationError(MethodArgumentNotValidException ex) {
+
+        ErrorDto errorDto = ErrorDto.builder()
+                            .errorCode("METHOD_ARGUMENT_INVALID")
+                            .errorMessage(ex.getMessage())
+                            .status(HttpStatus.BAD_REQUEST)
+                            .build();
+
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST)
+                        .body(errorDto);
     }
 }

@@ -19,7 +19,7 @@ import javax.validation.constraints.Positive;
 public class CustomerDto {
 
     @JsonProperty("customerId")
-    //@Positive
+    @Positive
     private Long customerId;
 
     @JsonProperty("FirstName")

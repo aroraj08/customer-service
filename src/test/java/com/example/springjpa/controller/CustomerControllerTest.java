@@ -6,6 +6,7 @@ import com.example.springjpa.mapper.CustomerMapper;
 import com.example.springjpa.mapper.CustomerMapperImpl;
 import com.example.springjpa.model.CustomerDto;
 import com.example.springjpa.service.CustomerService;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -43,6 +44,9 @@ class CustomerControllerTest {
     CustomerDto customerDto;
 
     CustomerMapper customerMapper = new CustomerMapperImpl();
+
+    @Autowired
+    private ObjectMapper objectMapper;
 
     @BeforeEach
     void setUp() {
@@ -96,7 +100,15 @@ class CustomerControllerTest {
 
         Long customerId = 123l;
 
-        String requestBody = "{\"customerId\":1002,\"FirstName\":\"Jatin\",\"LastName\":\"Arora\"}";
+        CustomerDto customerDto = CustomerDto.builder()
+                                .customerId(1002l)
+                                .firstName("Jatin")
+                                .lastName("Arora")
+                                .build();
+
+        String requestBody = objectMapper.writeValueAsString(customerDto);
+
+        //String requestBody = "{\"customerId\":1002,\"FirstName\":\"Jatin\",\"LastName\":\"Arora\"}";
 
         when(this.customerService.saveCustomer(any()))
                 .thenReturn(customerId);
