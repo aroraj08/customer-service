@@ -6,15 +6,18 @@ import com.example.springjpa.service.CustomerService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
-import javax.print.attribute.standard.Media;
+import javax.validation.Valid;
+import javax.validation.constraints.NotNull;
 import java.net.URI;
 import java.util.List;
 import java.util.Optional;
 
 @RestController
 @RequestMapping("/customer/api/v1")
+@Validated // for enabling method valid validation
 public class CustomerController {
 
     private final CustomerService customerService;
@@ -41,7 +44,7 @@ public class CustomerController {
 
     @PostMapping(consumes = {MediaType.APPLICATION_JSON_VALUE},
             produces = {MediaType.APPLICATION_JSON_VALUE})
-    public ResponseEntity<Long> addNewCustomer(@RequestBody CustomerDto customerDto) {
+    public ResponseEntity<Long> addNewCustomer(@Valid @RequestBody CustomerDto customerDto) {
 
         Long customerId = this.customerService.saveCustomer(customerDto);
         return ResponseEntity
@@ -50,8 +53,9 @@ public class CustomerController {
     }
 
     @PutMapping("/{customerId}")
-    public ResponseEntity updateCustomer(@PathVariable("customerId") Long customerId,
-                                         @RequestBody CustomerDto customerDto) throws CustomerNotFoundException {
+    public ResponseEntity updateCustomer(@NotNull @PathVariable("customerId") Long customerId,
+                                         @Valid @RequestBody CustomerDto customerDto)
+            throws CustomerNotFoundException {
 
         this.customerService.updateCustomer(customerId, customerDto);
         return ResponseEntity.noContent().build();
