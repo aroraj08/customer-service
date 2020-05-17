@@ -56,10 +56,6 @@ class CustomerControllerTest {
                 .lastName("dummy").build();
     }
 
-    @AfterEach
-    void tearDown() {
-    }
-
     @Test
     void getCustomerById() throws Exception, CustomerNotFoundException {
 
@@ -101,14 +97,11 @@ class CustomerControllerTest {
         Long customerId = 123l;
 
         CustomerDto customerDto = CustomerDto.builder()
-                                .customerId(1002l)
                                 .firstName("Jatin")
                                 .lastName("Arora")
                                 .build();
 
         String requestBody = objectMapper.writeValueAsString(customerDto);
-
-        //String requestBody = "{\"customerId\":1002,\"FirstName\":\"Jatin\",\"LastName\":\"Arora\"}";
 
         when(this.customerService.saveCustomer(any()))
                 .thenReturn(customerId);
@@ -125,7 +118,13 @@ class CustomerControllerTest {
     void updateCustomer() throws Exception, CustomerNotFoundException {
 
         Long customerId = 123l;
-        String requestBody = "{\"customerId\":1002,\"FirstName\":\"Jatin\",\"LastName\":\"Arora\"}";
+
+        CustomerDto customerDto = CustomerDto.builder()
+                .firstName("Jatin")
+                .lastName("Arora")
+                .build();
+
+        String requestBody = objectMapper.writeValueAsString(customerDto);
 
         when(this.customerService.updateCustomer(any(), any()))
                 .thenReturn(this.customerDto);

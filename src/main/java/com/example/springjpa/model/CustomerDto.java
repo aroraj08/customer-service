@@ -19,7 +19,7 @@ import javax.validation.constraints.Positive;
 public class CustomerDto {
 
     @JsonProperty("customerId")
-    @Positive
+    @Null
     private Long customerId;
 
     @JsonProperty("FirstName")
@@ -29,7 +29,4 @@ public class CustomerDto {
     @JsonProperty("LastName")
     @NotBlank
     private String lastName;
-
-    @Null  //this annotation will make sure that client can not set this value in request
-    private Long id;
 }

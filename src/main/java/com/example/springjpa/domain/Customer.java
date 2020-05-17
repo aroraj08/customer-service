@@ -12,15 +12,12 @@ import javax.persistence.*;
 @AllArgsConstructor
 @Data
 @Builder
-@SequenceGenerator(name="ID_SEQ", initialValue = 1)
+@SequenceGenerator(name="ID_SEQ", initialValue = 1000)
 public class Customer {
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "ID_SEQ")
-    private Long id;
-
-    @Column(unique = true, updatable = false)
-    private Long customerId; // business key
+    private Long customerId;
     private String firstName;
     private String lastName;
 

@@ -28,19 +28,16 @@ public class SpringJpaApplication {
             logger.info("saving dummy customers");
 
             customerRepository.save(Customer.builder()
-                    .customerId(1000l)
                     .firstName("Kapil")
                     .lastName("Arora")
                     .build());
 
             customerRepository.save(Customer.builder()
-                    .customerId(1001l)
                     .firstName("Preeti")
                     .lastName("Miglani")
                     .build());
 
             customerRepository.save(Customer.builder()
-                    .customerId(1002l)
                     .firstName("Jatin")
                     .lastName("Arora")
                     .build());

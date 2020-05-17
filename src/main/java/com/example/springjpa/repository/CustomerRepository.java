@@ -10,9 +10,7 @@ import java.util.Optional;
 
 public interface CustomerRepository extends CrudRepository<Customer, Long> {
 
-    List<Customer> findByLastName(String lastName);
-
-    @Query(nativeQuery= true, value = "SELECT * FROM CUSTOMER c where  c.customer_id = :customer_id")
+    //@Query(nativeQuery= true, value = "SELECT * FROM CUSTOMER c where  c.customer_id = :customer_id")
     Optional<Customer> findByCustomerId(@Param("customer_id") Long customerId);
 
     void deleteByCustomerId(Long customerId);

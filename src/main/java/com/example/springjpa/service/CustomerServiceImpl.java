@@ -55,6 +55,7 @@ public class CustomerServiceImpl implements CustomerService {
         // update Customer domain object with data from Dto and save it back to DB
         customer.setFirstName(c.getFirstName());
         customer.setLastName(c.getLastName());
+        customer.setCustomerId(customerId);
 
         Customer savedCustomer = this.customerRepository.save(customer);
         return this.customerMapper.customerToCustomerDto(savedCustomer);
