@@ -23,10 +23,10 @@ phases:
       - echo pushing to repo
       - docker login -u $DOCKER_LOGIN_USERNAME -p $DOCKER_LOGIN_PASSWORD
       - docker push arorajatin08/customer-service:${COMMIT_HASH}
-artifacts:
-  files:
-    - target/*.jar
-  discard-paths: yes
+#artifacts:
+#  files:
+#    - target/*.jar
+#  discard-paths: yes
 cache:
   paths:
     - '/root/.m2/**/*'
