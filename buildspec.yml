@@ -1,0 +1,51 @@
+version: 0.2
+env:
+  parameter-store:
+    DOCKER_LOGIN_USERNAME: /CodeBuild/dockerLoginUsername
+    DOCKER_LOGIN_PASSWORD: /CodeBuild/dockerLoginPassword
+phases:
+  pre_build:
+    commands:
+      - echo pre build step
+      - COMMIT_HASH=$(echo $CODEBUILD_RESOLVED_SOURCE_VERSION | cut -c 1-7)
+      - echo COMMIT_HASH
+      - echo pre build over
+      # - command
+  build:
+    commands:
+      - echo starting maven build
+      - cd $CODEBUILD_SRC_DIR
+      - mvn clean install
+      - docker build --build-arg JAR_FILE=target/*.jar -t arorajatin08/customer-service:${COMMIT_HASH} .
+      # - command
+  post_build:
+    commands:
+      - echo pushing to repo
+      - docker login -u $DOCKER_LOGIN_USERNAME -p $DOCKER_LOGIN_PASSWORD
+      - docker push arorajatin08/customer-service:${COMMIT_HASH}
+artifacts:
+  files:
+    - target/*.jar
+  discard-paths: yes
+cache:
+  paths:
+    - '/root/.m2/**/*'
+      # - command
+      #reports:
+      #report-name-or-arn:
+      #files:
+      # - location
+    # - location
+    #base-directory: location
+    #discard-paths: yes
+    #file-format: JunitXml | CucumberJson
+    #artifacts:
+    #files:
+    # - location
+    # - location
+    #name: $(date +%Y-%m-%d)
+    #discard-paths: yes
+    #base-directory: location
+    #cache:
+    #paths:
+    # - paths
