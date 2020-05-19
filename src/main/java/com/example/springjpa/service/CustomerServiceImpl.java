@@ -5,16 +5,22 @@ import com.example.springjpa.mapper.CustomerMapper;
 import com.example.springjpa.model.CustomerDto;
 import com.example.springjpa.domain.Customer;
 import com.example.springjpa.repository.CustomerRepository;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.concurrent.CompletableFuture;
+import java.util.concurrent.TimeUnit;
 import java.util.stream.Collectors;
 
 @Service
 public class CustomerServiceImpl implements CustomerService {
+
+    private static final Logger logger = LoggerFactory.getLogger(CustomerServiceImpl.class);
 
     private final CustomerRepository customerRepository;
 
@@ -36,6 +42,7 @@ public class CustomerServiceImpl implements CustomerService {
                     .map(c -> customerMapper.customerToCustomerDto(c))
                     .collect(Collectors.toList());
 
+        // asyncMethodExecution(); this was just for testing purpose
         return Optional.of(customerDtoList);
     }
 
@@ -88,5 +95,22 @@ public class CustomerServiceImpl implements CustomerService {
         });
 
         return customer;
+    }
+
+
+    private void asyncMethodExecution() {
+
+        CompletableFuture<Void> result = CompletableFuture.supplyAsync(() -> {
+            try {
+                TimeUnit.SECONDS.sleep(5);
+            } catch (InterruptedException e) {
+                logger.error(e.getMessage());
+            }
+            return "Result from async call";
+        }).thenAccept((r) -> {
+           logger.info("logged : {}", r );
+        });
+
+        CompletableFuture.allOf();
     }
 }
