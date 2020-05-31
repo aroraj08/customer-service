@@ -1,19 +1,19 @@
 package com.example.springjpa.domain;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import javax.persistence.*;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @NoArgsConstructor
 @AllArgsConstructor
-@Data
 @Builder
 @SequenceGenerator(name="ID_SEQ", initialValue = 1000)
-public class Customer {
+@Getter
+@Setter
+public class Customer extends BaseEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "ID_SEQ")
@@ -21,4 +21,15 @@ public class Customer {
     private String firstName;
     private String lastName;
 
+    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "customer")
+    private Set<Address> addressSet = new HashSet<>();
+
+    public Customer addAddress(Address address) {
+        address.setCustomer(this);
+        if (this.addressSet == null) {
+            this.addressSet = new HashSet<>();
+        }
+        this.addressSet.add(address);
+        return this;
+    }
 }

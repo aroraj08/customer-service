@@ -1,31 +1,36 @@
 package com.example.springjpa.domain;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import com.example.springjpa.model.AddressType;
+import lombok.*;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 
-@Data
 @NoArgsConstructor
 @Builder
 @Entity
 @AllArgsConstructor
-public class Address {
+@Getter
+@Setter
+public class Address extends BaseEntity {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     public Long id;
 
-    private Long customerId;
-    private String addressLine1;
-    private String addressLine2;
+    private String address1;
+    private String address2;
     private String city;
     private String state;
-    private String country;
     private String zipCode;
+
+    @Enumerated(value = EnumType.STRING)
+    private AddressType addressType;
+
+    @ManyToOne
+    @JoinColumn(name = "customerId")
+    private Customer customer;
+
+    public void setCustomer(Customer customer) {
+        this.customer = customer;
+    }
 }

@@ -1,21 +1,22 @@
 package com.example.springjpa.model;
 
+import com.example.springjpa.domain.Address;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Null;
 import javax.validation.constraints.Positive;
+import java.util.HashSet;
+import java.util.Set;
 
-@Data
 @AllArgsConstructor
 @JsonIgnoreProperties(ignoreUnknown = true)
 @Builder
 @NoArgsConstructor
+@Getter
+@Setter
 public class CustomerDto {
 
     @JsonProperty("customerId")
@@ -29,4 +30,7 @@ public class CustomerDto {
     @JsonProperty("LastName")
     @NotBlank
     private String lastName;
+
+    @JsonProperty("addresses")
+    private Set<AddressDto> addressSet;
 }
