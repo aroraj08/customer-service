@@ -25,7 +25,7 @@ public class SpringJpaApplication {
     }
 
     @Bean
-    @Profile("test")
+    @Profile("local")
     public CommandLineRunner setupData(CustomerRepository customerRepository) {
 
         return (args) -> {

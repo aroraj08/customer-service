@@ -85,7 +85,7 @@ class CustomerControllerTest {
         when(this.customerService.getCustomers())
                 .thenReturn(customerDtoListOp);
 
-        this.mockMvc.perform(get(URI.create(MAPPING + "/all")))
+        this.mockMvc.perform(get(URI.create(MAPPING + "/customers")))
                 .andExpect(status().isOk())
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON))
                 .andExpect(jsonPath("$.[0].FirstName", is(customerDtoList.get(0).getFirstName())));
