@@ -33,7 +33,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @WebMvcTest(controllers = {CustomerController.class})
 class CustomerControllerTest {
 
-    private static final String MAPPING = "/customer/api/v1";
+    private static final String MAPPING = "/api/v1/customers";
 
     @Autowired
     private MockMvc mockMvc;
@@ -85,7 +85,7 @@ class CustomerControllerTest {
         when(this.customerService.getCustomers())
                 .thenReturn(customerDtoListOp);
 
-        this.mockMvc.perform(get(URI.create(MAPPING + "/customers")))
+        this.mockMvc.perform(get(URI.create(MAPPING)))
                 .andExpect(status().isOk())
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON))
                 .andExpect(jsonPath("$.[0].FirstName", is(customerDtoList.get(0).getFirstName())));
@@ -109,7 +109,7 @@ class CustomerControllerTest {
         this.mockMvc.perform(post(MAPPING)
                     .contentType(MediaType.APPLICATION_JSON)
                     .content(requestBody))
-                .andExpect(header().string("Location", "/customer/api/v1/" + customerId))
+                .andExpect(header().string("Location", "/api/v1/customers/" + customerId))
                 .andExpect(status().isCreated());
 
     }

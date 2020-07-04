@@ -21,18 +21,9 @@ import java.util.Map;
 import java.util.Optional;
 
 @RestController
-@RequestMapping("/customer/api/v1")
+@RequestMapping("/api/v1/customers")
 @Validated // for enabling method valid validation
 public class CustomerController {
-
-    @Value("${log.level}")
-    private String logLevel;
-
-    @Value("${hello.message}")
-    private String message;
-
-    @Value("${spring.datasource.password}")
-    private String password;
 
     private final CustomerService customerService;
     private static final Logger logger = LoggerFactory.getLogger(CustomerController.class.getName());
@@ -50,7 +41,7 @@ public class CustomerController {
 
     }
 
-    @GetMapping("/customers")
+    @GetMapping
     public ResponseEntity<List<CustomerDto>> getAllCustomers() {
 
         Optional<List<CustomerDto>> customerList =
@@ -64,7 +55,7 @@ public class CustomerController {
 
         Long customerId = this.customerService.saveCustomer(customerDto);
         return ResponseEntity
-                .created(URI.create("/customer/api/v1/" + customerId.longValue()))
+                .created(URI.create("/api/v1/customers/" + customerId.longValue()))
                 .build();
     }
 
@@ -83,13 +74,4 @@ public class CustomerController {
         return ResponseEntity.noContent().build();
     }
 
-    @GetMapping("/config")
-    public ResponseEntity<Map<String, String>> cloudConfigMap() {
-        Map<String, String> map = new HashMap<>();
-        map.put("log.level", logLevel);
-        map.put("message", message);
-        map.put("db pass" , password);
-
-        return ResponseEntity.ok(map);
-    }
 }
