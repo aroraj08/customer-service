@@ -1,0 +1,54 @@
+version: '3.0'
+services:
+  eureka:
+    image: arorajatin08/rapidkart-eureka
+    ports:
+    - 8761:8761
+  config:
+    image: arorajatin08/rapidkart-config-server
+    ports:
+    - 8888:8888
+    depends_on:
+      - eureka
+    environment:
+      EUREKA_CLIENT_SERVICEURL_DEFAULTZONE: http://netflix:eureka@eureka:8761/eureka/
+      EUREKA_INSTANCE_PREFER_IP_ADDRESS: 'true'
+  customer-service:
+    image: arorajatin08/rapidkart-order-service
+    ports:
+    - 8070:8070
+    depends_on:
+      - eureka
+      - config
+    environment:
+      EUREKA_CLIENT_SERVICEURL_DEFAULTZONE: http://netflix:eureka@eureka:8761/eureka/
+      SPRING_ACTIVE_PROFILES: local-discovery
+      EUREKA_INSTANCE_PREFER_IP_ADDRESS: 'true'
+    restart: on-failure
+  order-service:
+    image: arorajatin08/rapidkart-customer-service
+    ports:
+    - 8071:8071
+    depends_on:
+      - eureka
+      - config
+      - customer-service
+    environment:
+      EUREKA_CLIENT_SERVICEURL_DEFAULTZONE: http://netflix:eureka@eureka:8761/eureka/
+      SPRING_ACTIVE_PROFILES: local-discovery
+      EUREKA_INSTANCE_PREFER_IP_ADDRESS: 'true'
+    restart: on-failure
+  gateway:
+    image: arorajatin08/rapidkart-gateway
+    ports:
+    - 9090:9090
+    depends_on:
+      - eureka
+      - config
+      - customer-service
+      - order-service
+    environment:
+      EUREKA_CLIENT_SERVICEURL_DEFAULT_ZONE: http://netflix:eureka@eureka:8761/eureka/
+      SPRING_ACTIVE_PROFILES: local-discovery
+      EUREKA_INSTANCE_PREFER_IP_ADDRESS: 'true'
+
