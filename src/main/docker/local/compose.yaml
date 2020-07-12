@@ -22,7 +22,7 @@ services:
       - config
     environment:
       EUREKA_CLIENT_SERVICEURL_DEFAULTZONE: http://netflix:eureka@eureka:8761/eureka/
-      SPRING_ACTIVE_PROFILES: local-discovery
+      SPRING_PROFILES_ACTIVE: local-discovery
       EUREKA_INSTANCE_PREFER_IP_ADDRESS: 'true'
       SPRING_CLOUD_CONFIG_URI: http://MyUserName:MySecretPassword@config:8888
     restart: on-failure
@@ -36,7 +36,7 @@ services:
       - customer-service
     environment:
       EUREKA_CLIENT_SERVICEURL_DEFAULTZONE: http://netflix:eureka@eureka:8761/eureka/
-      SPRING_ACTIVE_PROFILES: local-discovery
+      SPRING_PROFILES_ACTIVE: local-discovery
       EUREKA_INSTANCE_PREFER_IP_ADDRESS: 'true'
       SPRING_CLOUD_CONFIG_URI: http://MyUserName:MySecretPassword@config:8888
     restart: on-failure
@@ -51,6 +51,6 @@ services:
       - order-service
     environment:
       EUREKA_CLIENT_SERVICEURL_DEFAULT_ZONE: http://netflix:eureka@eureka:8761/eureka/
-      SPRING_ACTIVE_PROFILES: local-discovery
+      SPRING_PROFILES_ACTIVE: local-discovery
       EUREKA_INSTANCE_PREFER_IP_ADDRESS: 'true'
       SPRING_CLOUD_CONFIG_URI: http://MyUserName:MySecretPassword@config:8888
