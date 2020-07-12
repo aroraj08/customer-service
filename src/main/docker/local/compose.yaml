@@ -24,6 +24,7 @@ services:
       EUREKA_CLIENT_SERVICEURL_DEFAULTZONE: http://netflix:eureka@eureka:8761/eureka/
       SPRING_ACTIVE_PROFILES: local-discovery
       EUREKA_INSTANCE_PREFER_IP_ADDRESS: 'true'
+      SPRING_CLOUD_CONFIG_URI: http://MyUserName:MySecretPassword@config:8888
     restart: on-failure
   order-service:
     image: arorajatin08/rapidkart-customer-service
@@ -37,6 +38,7 @@ services:
       EUREKA_CLIENT_SERVICEURL_DEFAULTZONE: http://netflix:eureka@eureka:8761/eureka/
       SPRING_ACTIVE_PROFILES: local-discovery
       EUREKA_INSTANCE_PREFER_IP_ADDRESS: 'true'
+      SPRING_CLOUD_CONFIG_URI: http://MyUserName:MySecretPassword@config:8888
     restart: on-failure
   gateway:
     image: arorajatin08/rapidkart-gateway
@@ -51,4 +53,4 @@ services:
       EUREKA_CLIENT_SERVICEURL_DEFAULT_ZONE: http://netflix:eureka@eureka:8761/eureka/
       SPRING_ACTIVE_PROFILES: local-discovery
       EUREKA_INSTANCE_PREFER_IP_ADDRESS: 'true'
-
+      SPRING_CLOUD_CONFIG_URI: http://MyUserName:MySecretPassword@config:8888
