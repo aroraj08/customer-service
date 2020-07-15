@@ -9,6 +9,10 @@ http://localhost:8070/h2-console/
 
 #### Steps to deploying in Docker Swarm Cluster are available in file "ClusterDeploymentSteps"
 
+#### Docker image (layered) can be built using below command - 
+
+`mvn clean package -Dmaven.test.skip=true docker:build docker:push`
+
 ### Pending enhancements -
 
 5. Add actuator dependency
