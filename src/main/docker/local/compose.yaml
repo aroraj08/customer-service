@@ -14,7 +14,7 @@ services:
       EUREKA_CLIENT_SERVICEURL_DEFAULTZONE: http://netflix:eureka@eureka:8761/eureka/
       EUREKA_INSTANCE_PREFER_IP_ADDRESS: 'true'
   customer-service:
-    image: arorajatin08/rapidkart-order-service
+    image: arorajatin08/rapidkart-customer-service
     ports:
     - 8070:8070
     depends_on:
@@ -27,7 +27,7 @@ services:
       SPRING_CLOUD_CONFIG_URI: http://MyUserName:MySecretPassword@config:8888
     restart: on-failure
   order-service:
-    image: arorajatin08/rapidkart-customer-service
+    image: arorajatin08/rapidkart-order-service
     ports:
     - 8071:8071
     depends_on:

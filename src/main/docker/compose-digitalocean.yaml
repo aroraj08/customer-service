@@ -1,7 +1,7 @@
 version: '3.0'
 services:
   rapidkart-customer-service:
-    image: arorajatin08/rapidkart-order-service
+    image: arorajatin08/rapidkart-customer-service
     ports:
       - 8070:8070
     environment:
@@ -11,7 +11,7 @@ services:
     deploy:
       replicas: 2
   rapidkart-order-service:
-    image: arorajatin08/rapidkart-customer-service
+    image: arorajatin08/rapidkart-order-service
     ports:
       - 8071:8071
     environment:
