@@ -1,5 +1,13 @@
 version: '3.0'
 services:
+  config:
+    image: arorajatin08/rapidkart-config-server
+    ports:
+      - 8888:8888
+    environment:
+      SPRING_APPLICATION_JSON: '{"eureka":{"client":{"serviceUrl":{"defaultZone":"http://netflix:eureka@138.68.241.160:8761/eureka"},"region":"default","registerWithEureka":true},"instance":{"preferIpAddress":false,"hostName":"rapidkart-config-server"}},"application":{"name":"rapidkart-config-server"}}'
+    deploy:
+      replicas: 2
   rapidkart-customer-service:
     image: arorajatin08/rapidkart-customer-service
     ports:
