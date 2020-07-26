@@ -97,7 +97,7 @@ public class CustomerServiceImpl implements CustomerService {
     @Override
     @Caching(evict = @CacheEvict(cacheNames = "customers", allEntries = true),
             put = @CachePut(cacheNames = "customer", key = "#result.longValue()",
-                    unless = "#result != null"))
+                    unless = "#result == null"))
     public Long saveCustomer(CustomerDto customerDto) {
 
         // create customer object using customer Dto object
