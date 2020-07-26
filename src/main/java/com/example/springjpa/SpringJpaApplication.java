@@ -9,6 +9,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.cache.annotation.EnableCaching;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Profile;
 
@@ -16,6 +17,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 @SpringBootApplication
+@EnableCaching
 public class SpringJpaApplication {
 
     private static final Logger logger = LoggerFactory.getLogger(SpringJpaApplication.class);
@@ -25,7 +27,7 @@ public class SpringJpaApplication {
     }
 
     @Bean
-    @Profile("local-discovery")
+    @Profile({"local-discovery", "local"})
     public CommandLineRunner setupData(CustomerRepository customerRepository) {
 
         return (args) -> {

@@ -3,13 +3,15 @@ package com.example.springjpa.model;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.*;
 
+import java.io.Serializable;
+
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
 @Getter
 @Setter
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class AddressDto {
+public class AddressDto implements Serializable {
 
     private Long id;
     private String address1;

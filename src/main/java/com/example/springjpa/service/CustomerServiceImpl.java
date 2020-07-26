@@ -8,8 +8,13 @@ import com.example.springjpa.model.AddressDto;
 import com.example.springjpa.model.CustomerDto;
 import com.example.springjpa.domain.Customer;
 import com.example.springjpa.repository.CustomerRepository;
+import org.hibernate.annotations.Cache;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.CachePut;
+import org.springframework.cache.annotation.Cacheable;
+import org.springframework.cache.annotation.Caching;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
@@ -35,6 +40,7 @@ public class CustomerServiceImpl implements CustomerService {
     }
 
     @Override
+    @Cacheable(cacheNames = "customers", unless = "#result?.size()==0")
     public Optional<List<CustomerDto>> getCustomers() {
 
         List<Customer> customerList = new ArrayList<>();
@@ -50,6 +56,7 @@ public class CustomerServiceImpl implements CustomerService {
     }
 
     @Override
+    @Cacheable(cacheNames = "customer", key="#customerId")
     public CustomerDto getCustomerById(Long customerId) throws CustomerNotFoundException {
 
         Customer customer = checkIfPresent(customerId);
@@ -58,6 +65,8 @@ public class CustomerServiceImpl implements CustomerService {
     }
 
     @Override
+    @Caching(put = @CachePut(cacheNames = "customer", key = "#customerId"),
+            evict = @CacheEvict(cacheNames = "customers", allEntries = true))
     public CustomerDto updateCustomer(Long customerId, CustomerDto customerDto)
             throws CustomerNotFoundException {
 
@@ -86,6 +95,9 @@ public class CustomerServiceImpl implements CustomerService {
     }
 
     @Override
+    @Caching(evict = @CacheEvict(cacheNames = "customers", allEntries = true),
+            put = @CachePut(cacheNames = "customer", key = "#result.longValue()",
+                    unless = "#result != null"))
     public Long saveCustomer(CustomerDto customerDto) {
 
         // create customer object using customer Dto object
@@ -103,6 +115,8 @@ public class CustomerServiceImpl implements CustomerService {
 
     @Override
     @Transactional
+    @Caching(evict = {@CacheEvict(cacheNames = "customers", allEntries = true),
+            @CacheEvict(cacheNames = "customer", key = "#customerId") })
     public void deleteCustomer(Long customerId) {
 
         this.customerRepository.deleteByCustomerId(customerId);
