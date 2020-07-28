@@ -1,0 +1,12 @@
+spring:
+  cloud:
+    discovery:
+      enabled: false
+
+cache:
+  timeoutSeconds: 150
+  redisPort: 6379
+  redisHost: 64.227.92.244
+  cacheExpiration:
+    customers: 60
+    customer : 30

@@ -8,7 +8,7 @@ services:
       SPRING_PROFILES_ACTIVE: local-discovery
       #SPRING_APPLICATION_JSON: '{"eureka":{"client":{"serviceUrl":{"defaultZone":"http://netflix:eureka@138.68.241.160:8761/eureka"},"region":"default","registerWithEureka":true},"instance":{"preferIpAddress":false,"hostName":"rapidkart-customer-service"}},"spring":{"cloud":{"config":{"uri":"http://MyUserName:MySecretPassword@167.71.150.40:8888","failFast":true}}},"application":{"name":"rapidkart-customer-service"}}'
       SPRING_APPLICATION_JSON: '{"eureka":{"client":{"serviceUrl":{"defaultZone":"http://netflix:eureka@138.68.241.160:8761/eureka"},"region":"default","registerWithEureka":true},"instance":{"preferIpAddress":false,"hostName":"rapidkart-customer-service"}},"spring":{"cloud":{"config":{"discovery":{"enabled":true,"serviceId":"rapidkart-config-server"},"failFast":true,"username":"MyUserName","password":"MySecretPassword"}},"redis":{"host":"64.227.90.194","port":"6379","timeout":"900"}},"application":{"name":"rapidkart-customer-service"}}'
-    restart: on-failure
+    restart: on-fCachingConfigurerSupportailure
     deploy:
       replicas: 2
   rapidkart-order-service:
