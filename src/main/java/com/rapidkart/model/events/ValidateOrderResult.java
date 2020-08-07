@@ -1,17 +1,16 @@
 package com.rapidkart.model.events;
 
 import com.rapidkart.model.CustomerDto;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.RequiredArgsConstructor;
+import lombok.*;
 
-@RequiredArgsConstructor
-@Builder
+import java.util.UUID;
+
 @Data
+@NoArgsConstructor
 @AllArgsConstructor
+@Builder
 public class ValidateOrderResult {
-
-    private CustomerDto customerDto;
-    private Boolean customerExists = true;
+    private Long orderId;
+    private Boolean isLegitimateCustomer;
+    private Boolean customerExists;
 }

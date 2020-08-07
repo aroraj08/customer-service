@@ -1,4 +1,4 @@
-package com.rapidkart.customerservice.service;
+package com.rapidkart.customerservice.service.listener;
 
 import com.rapidkart.customerservice.config.JmsConfig;
 import com.rapidkart.customerservice.domain.Customer;
@@ -36,11 +36,13 @@ public class ValidateCustomerListener {
             boolean isLegitimate = customer.getIsLegitimateUser();
 
             result = ValidateOrderResult.builder()
-                    .customerDto(customerMapper.customerToCustomerDto(customer))
-                    .customerExists(true)
+                     .isLegitimateCustomer(Boolean.valueOf(isLegitimate))
+                     .orderId(request.getOrderId())
+                     .customerExists(true)
                     .build();
         } else {
             result = ValidateOrderResult.builder()
+                        .orderId(request.getOrderId())
                         .customerExists(false)
                         .build();
         }

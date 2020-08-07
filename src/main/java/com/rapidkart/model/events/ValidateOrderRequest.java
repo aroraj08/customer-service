@@ -11,5 +11,6 @@ import lombok.RequiredArgsConstructor;
 @Builder
 public class ValidateOrderRequest {
 
+    private Long orderId;
     private Long customerId;
 }
