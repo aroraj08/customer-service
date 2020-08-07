@@ -4,7 +4,7 @@ import com.rapidkart.customerservice.domain.Customer;
 import com.rapidkart.customerservice.exceptions.CustomerNotFoundException;
 import com.rapidkart.customerservice.mapper.CustomerMapper;
 import com.rapidkart.customerservice.mapper.CustomerMapperImpl;
-import com.rapidkart.customerservice.model.CustomerDto;
+import com.rapidkart.model.CustomerDto;
 import com.rapidkart.customerservice.service.CustomerService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.BeforeEach;

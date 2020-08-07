@@ -2,7 +2,7 @@ package com.rapidkart.customerservice;
 
 import com.rapidkart.customerservice.domain.Address;
 import com.rapidkart.customerservice.domain.Customer;
-import com.rapidkart.customerservice.model.AddressType;
+import com.rapidkart.model.AddressType;
 import com.rapidkart.customerservice.repository.CustomerRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

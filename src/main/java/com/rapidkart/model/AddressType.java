@@ -1,4 +1,4 @@
-package com.rapidkart.customerservice.model;
+package com.rapidkart.model;
 
 public enum AddressType {
 

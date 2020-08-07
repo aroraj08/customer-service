@@ -1,6 +1,6 @@
 package com.rapidkart.customerservice.mapper;
 
-import com.rapidkart.customerservice.model.CustomerDto;
+import com.rapidkart.model.CustomerDto;
 import com.rapidkart.customerservice.domain.Customer;
 import org.mapstruct.Mapper;
 

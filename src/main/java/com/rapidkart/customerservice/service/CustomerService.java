@@ -1,7 +1,7 @@
 package com.rapidkart.customerservice.service;
 
 import com.rapidkart.customerservice.exceptions.CustomerNotFoundException;
-import com.rapidkart.customerservice.model.CustomerDto;
+import com.rapidkart.model.CustomerDto;
 
 import java.util.List;
 import java.util.Optional;

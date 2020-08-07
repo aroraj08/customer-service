@@ -6,7 +6,7 @@ import com.rapidkart.customerservice.mapper.AddressMapper;
 import com.rapidkart.customerservice.mapper.AddressMapperImpl;
 import com.rapidkart.customerservice.mapper.CustomerMapper;
 import com.rapidkart.customerservice.mapper.CustomerMapperImpl;
-import com.rapidkart.customerservice.model.CustomerDto;
+import com.rapidkart.model.CustomerDto;
 import com.rapidkart.customerservice.repository.CustomerRepository;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;

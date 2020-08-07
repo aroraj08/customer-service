@@ -9,6 +9,7 @@ import org.springframework.jms.support.converter.MessageType;
 public class JmsConfig {
 
     public static final String CUSTOMER_VALIDATION_QUEUE = "CUSTOMER_VALIDATION_QUEUE";
+    public static final String CUSTOMER_VALIDATION_RESPONSE_QUEUE = "CUSTOMER_VALIDATION_RESPONSE_QUEUE";
 
     @Bean
     public MessageConverter messageConverter(ObjectMapper objectMapper) {

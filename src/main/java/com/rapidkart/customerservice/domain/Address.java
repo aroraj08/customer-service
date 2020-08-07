@@ -1,6 +1,6 @@
 package com.rapidkart.customerservice.domain;
 
-import com.rapidkart.customerservice.model.AddressType;
+import com.rapidkart.model.AddressType;
 import lombok.*;
 
 import javax.persistence.*;

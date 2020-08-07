@@ -1,4 +1,4 @@
-package com.rapidkart.customerservice.model;
+package com.rapidkart.model;
 
 import lombok.*;
 import org.springframework.http.HttpStatus;

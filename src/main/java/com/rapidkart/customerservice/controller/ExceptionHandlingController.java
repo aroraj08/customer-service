@@ -1,6 +1,6 @@
 package com.rapidkart.customerservice.controller;
 
-import com.rapidkart.customerservice.model.ErrorDto;
+import com.rapidkart.model.ErrorDto;
 import com.rapidkart.customerservice.exceptions.CustomerNotFoundException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
