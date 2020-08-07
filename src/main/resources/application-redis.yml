@@ -6,7 +6,7 @@ spring:
 cache:
   timeoutSeconds: 150
   redisPort: 6379
-  redisHost: 64.227.92.244
+  redisHost: 157.245.180.164
   cacheExpiration:
     customers: 60
     customer : 30
