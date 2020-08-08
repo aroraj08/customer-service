@@ -10,7 +10,7 @@ import java.util.UUID;
 @AllArgsConstructor
 @Builder
 public class ValidateOrderResult {
+
     private Long orderId;
-    private Boolean isLegitimateCustomer;
-    private Boolean customerExists;
+    private Boolean isValidUser;
 }

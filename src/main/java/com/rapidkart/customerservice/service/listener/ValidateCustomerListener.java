@@ -7,6 +7,7 @@ import com.rapidkart.customerservice.repository.CustomerRepository;
 import com.rapidkart.model.events.ValidateOrderRequest;
 import com.rapidkart.model.events.ValidateOrderResult;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.jms.annotation.JmsListener;
 import org.springframework.jms.core.JmsTemplate;
 import org.springframework.stereotype.Component;
@@ -15,6 +16,7 @@ import java.util.Optional;
 
 @Component
 @RequiredArgsConstructor
+@Slf4j
 public class ValidateCustomerListener {
 
     private final JmsTemplate jmsTemplate;
@@ -33,18 +35,14 @@ public class ValidateCustomerListener {
 
         if (customerOptional.isPresent()) {
             Customer customer = customerOptional.get();
-            boolean isLegitimate = customer.getIsLegitimateUser();
+            boolean isLegitimateUser = customer.getIsLegitimateUser();
 
             result = ValidateOrderResult.builder()
-                     .isLegitimateCustomer(Boolean.valueOf(isLegitimate))
                      .orderId(request.getOrderId())
-                     .customerExists(true)
-                    .build();
+                     .isValidUser(isLegitimateUser)
+                     .build();
         } else {
-            result = ValidateOrderResult.builder()
-                        .orderId(request.getOrderId())
-                        .customerExists(false)
-                        .build();
+            log.error(String.format("Customer does not exist for order id %s", request.getOrderId()));
         }
         jmsTemplate.convertAndSend(JmsConfig.CUSTOMER_VALIDATION_RESPONSE_QUEUE, result);
     }
