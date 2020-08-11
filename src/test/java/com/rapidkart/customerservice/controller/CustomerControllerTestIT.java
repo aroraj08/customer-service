@@ -30,7 +30,7 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 @WebMvcTest(controllers = {CustomerController.class})
-class CustomerControllerTest {
+class CustomerControllerTestIT {
 
     private static final String MAPPING = "/api/v1/customers";
 

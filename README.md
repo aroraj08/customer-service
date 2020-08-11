@@ -12,7 +12,8 @@ At this point, the application needs to connect to Redis server for Caching func
 #### Embedded database can be accessed at - 
 http://localhost:8070/h2-console/
 
-#### Test cases can be run using test profile - mvn clean install -Dspring.profiles.active=test
+#### Integration Tests can be run using verify phase - 
+`mvn verify`
 
 #### Docker image (layered) can be built using below command - 
 
