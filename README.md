@@ -25,7 +25,7 @@ http://localhost:8070/h2-console/
 https://reflectoring.io/spring-boot-data-jpa-test/
 https://www.baeldung.com/spring-boot-testcontainers-integration-test 
 
-### To run redis in a remote machine as a container - 
+#### To run redis in a remote machine as a container - 
 
 `docker pull redis`
 
@@ -33,9 +33,11 @@ https://www.baeldung.com/spring-boot-testcontainers-integration-test
 
 `apt install redis-tools`
 
-### To run JMS broker in a remote machine as a container (used activemq-artemis-docker from https://github.com/vromero/activemq-artemis-docker)  
+#### To run JMS broker in a remote machine as a container (used activemq-artemis-docker from https://github.com/vromero/activemq-artemis-docker)  
 
 `docker run -it --rm -p 8161:8161 -p 61616:61616 vromero/activemq-artemis`
   
-  
+#### Running wiremock will create mappings folder, where mappings for mock response are stored
+
+`java -jar wiremock-standalone-2.27.0.jar`  
 

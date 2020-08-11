@@ -1,0 +1,20 @@
+{
+  "id" : "7c8eac0e-2207-4cda-a88a-1e96533cb20a",
+  "name" : "api_v1_customers",
+  "request" : {
+    "url" : "/api/v1/customers",
+    "method" : "GET"
+  },
+  "response" : {
+    "status" : 200,
+    "body" : "<List><item><customerId>1000</customerId><FirstName>Kapil</FirstName><LastName>Arora</LastName><addresses/><isLegitimateUser>true</isLegitimateUser></item><item><customerId>1001</customerId><FirstName>Preeti</FirstName><LastName>Miglani</LastName><addresses><addresses><id>2</id><address1>address1_1</address1><address2>address1_2</address2><city>El Segundo</city><state>CA</state><zipCode/><addressType>HOME</addressType></addresses><addresses><id>1</id><address1>address2_1</address1><address2>address2_2</address2><city>El Segundo</city><state>CA</state><zipCode/><addressType>OFFICE</addressType></addresses></addresses><isLegitimateUser>true</isLegitimateUser></item><item><customerId>1002</customerId><FirstName>Jatin</FirstName><LastName>Arora</LastName><addresses><addresses><id>3</id><address1>address1_1</address1><address2>address1_2</address2><city>El Segundo</city><state>CA</state><zipCode/><addressType>HOME</addressType></addresses><addresses><id>4</id><address1>address2_1</address1><address2>address2_2</address2><city>El Segundo</city><state>CA</state><zipCode/><addressType>OFFICE</addressType></addresses></addresses><isLegitimateUser>false</isLegitimateUser></item></List>",
+    "headers" : {
+      "Content-Type" : "application/xhtml+xml",
+      "Date" : "Sat, 08 Aug 2020 18:56:08 GMT",
+      "Keep-Alive" : "timeout=60"
+    }
+  },
+  "uuid" : "7c8eac0e-2207-4cda-a88a-1e96533cb20a",
+  "persistent" : true,
+  "insertionIndex" : 2
+}
