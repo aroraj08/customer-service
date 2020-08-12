@@ -39,6 +39,7 @@ public class CustomerServiceImpl implements CustomerService {
     }
 
     @Override
+    @Transactional
     @Cacheable(cacheNames = "customers", unless = "#result?.size()==0")
     public Optional<List<CustomerDto>> getCustomers() {
 
@@ -55,6 +56,7 @@ public class CustomerServiceImpl implements CustomerService {
     }
 
     @Override
+    @Transactional
     @Cacheable(cacheNames = "customer", key="#customerId")
     public CustomerDto getCustomerById(Long customerId) throws CustomerNotFoundException {
 
@@ -64,6 +66,7 @@ public class CustomerServiceImpl implements CustomerService {
     }
 
     @Override
+    @Transactional
     @Caching(put = @CachePut(cacheNames = "customer", key = "#customerId"),
             evict = @CacheEvict(cacheNames = "customers", allEntries = true))
     public CustomerDto updateCustomer(Long customerId, CustomerDto customerDto)
@@ -125,20 +128,5 @@ public class CustomerServiceImpl implements CustomerService {
 
         Optional<Customer> customerObj = customerRepository.findByCustomerId(customerId);
         return customerObj.orElseThrow(() -> new CustomerNotFoundException("Customer not found : " + customerId));
-    }
-
-
-    private void asyncMethodExecution() {
-
-        CompletableFuture<Void> result = CompletableFuture.supplyAsync(() -> {
-            try {
-                TimeUnit.SECONDS.sleep(5);
-            } catch (InterruptedException e) {
-                logger.error(e.getMessage());
-            }
-            return "Result from async call";
-        }).thenAccept((r) -> logger.info("logged : {}", r ));
-
-        CompletableFuture.allOf();
     }
 }

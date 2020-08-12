@@ -20,6 +20,7 @@
         <spring-cloud.version>Hoxton.SR6</spring-cloud.version>
         <docker.image.prefix>arorajatin08</docker.image.prefix>
         <docker.image.name>${project.artifactId}</docker.image.name>
+        <springfox-swagger.version>3.0.0</springfox-swagger.version>
     </properties>
 
     <dependencyManagement>
@@ -113,6 +114,16 @@
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-artemis</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>io.springfox</groupId>
+            <artifactId>springfox-swagger2</artifactId>
+            <version>${springfox-swagger.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>io.springfox</groupId>
+            <artifactId>springfox-swagger-ui</artifactId>
+            <version>${springfox-swagger.version}</version>
         </dependency>
     </dependencies>
 
