@@ -1,6 +1,8 @@
 package com.rapidkart.customerservice.repository;
 
+import com.google.inject.internal.cglib.proxy.$FixedValue;
 import com.rapidkart.customerservice.domain.Customer;
+import org.springframework.data.jpa.repository.EntityGraph;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
@@ -14,4 +16,7 @@ public interface CustomerRepository extends CrudRepository<Customer, Long> {
     Optional<Customer> findByCustomerId(@Param("customer_id") Long customerId);
 
     void deleteByCustomerId(Long customerId);
+
+    @EntityGraph(value="Customer.address")
+    Iterable<Customer> findAll();
 }

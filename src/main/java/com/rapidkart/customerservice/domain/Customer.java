@@ -13,6 +13,8 @@ import java.util.Set;
 @SequenceGenerator(name="ID_SEQ", initialValue = 1000)
 @Getter
 @Setter
+@NamedEntityGraph(name = "Customer.address",
+        attributeNodes = @NamedAttributeNode("addressSet"))
 public class Customer extends BaseEntity {
 
     @Id

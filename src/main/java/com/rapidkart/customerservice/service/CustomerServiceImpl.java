@@ -38,8 +38,15 @@ public class CustomerServiceImpl implements CustomerService {
         this.addressMapper = addressMapper;
     }
 
+    /**
+     * This method uses Entity Graph to load address data eagerly and avoids N+1 SELECT problem.
+     * Using Entity Graph is helpful as it provides you ability to decide which method to load eagerly
+     * and which one as lazily (default behavior of one to many). Since, in this case, we knew that we
+     * had to always get the addresses for all customers, we went with EAGER loading, otherwise, it is not
+     * recommended.
+     * @return
+     */
     @Override
-    @Transactional
     @Cacheable(cacheNames = "customers", unless = "#result?.size()==0")
     public Optional<List<CustomerDto>> getCustomers() {
 
@@ -51,10 +58,16 @@ public class CustomerServiceImpl implements CustomerService {
                     .map(customerMapper :: customerToCustomerDto)
                     .collect(Collectors.toList());
 
-        // asyncMethodExecution(); this was just for testing purpose
         return Optional.of(customerDtoList);
     }
 
+    /**
+     * As this method uses Lazy Loading (default) to load address data for a customer,
+     * @Transactional annotation has been put to avoid LazyInitializationException.
+     * The only problem with using it this way is N+1 Select problem, which is OK for this
+     * as this method only retrieves data for 1 customer, so there will be two calls
+     * @param customerId
+     */
     @Override
     @Transactional
     @Cacheable(cacheNames = "customer", key="#customerId")
@@ -66,7 +79,6 @@ public class CustomerServiceImpl implements CustomerService {
     }
 
     @Override
-    @Transactional
     @Caching(put = @CachePut(cacheNames = "customer", key = "#customerId"),
             evict = @CacheEvict(cacheNames = "customers", allEntries = true))
     public CustomerDto updateCustomer(Long customerId, CustomerDto customerDto)
