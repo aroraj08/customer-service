@@ -1,5 +1,8 @@
 # Rapidkart-Customer-Service
 
+[![rapidkart-customer-service](https://circleci.com/gh/aroraj08/rapidkart-customer-service.svg?style=svg)](https://app.circleci.com/pipelines/github/aroraj08/rapidkart-customer-service?branch=master)
+
+
 This is a sample project using Spring Data JPA for persisting customer related data in in-memory H2 database (H2). It uses Redis backed cache for few of the operations. 
 Project is associated with multiple profiles - 
  1. local -- use this profile when the application needs to be run without any dependency on cloud-config, eureka server.
