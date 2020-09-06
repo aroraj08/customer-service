@@ -8,5 +8,5 @@ cache:
   redisPort: 6379
   redisHost: 157.245.180.164
   cacheExpiration:
-    customers: 60
-    customer : 30
+    customers: 120
+    customer : 150
